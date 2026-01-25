@@ -1,11 +1,27 @@
 "use client";
 
+import { useState } from "react";
 import { FaLocationArrow } from "react-icons/fa6";
 
 import { projects } from "@/data";
 import { PinContainer } from "./ui/Pin";
+import ProjectModal from "./ui/ProjectModal";
 
 const RecentProjects = () => {
+  const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleProjectClick = (project: typeof projects[0]) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    // Reset selected project after animation
+    setTimeout(() => setSelectedProject(null), 300);
+  };
+
   return (
     <div className="py-20">
       <h1 className="heading">
@@ -17,6 +33,11 @@ const RecentProjects = () => {
           <div
             className="lg:min-h-[32.5rem] h-[25rem] flex items-center justify-center sm:w-96 w-[80vw]"
             key={item.id}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              handleProjectClick(item);
+            }}
           >
             <PinContainer
               title={item.link}
@@ -76,6 +97,13 @@ const RecentProjects = () => {
           </div>
         ))}
       </div>
+
+      {/* Project Modal */}
+      <ProjectModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        project={selectedProject}
+      />
     </div>
   );
 };

@@ -8,8 +8,8 @@ export const navItems = [
 export const gridItems = [
   {
     id: 1,
-    title: "Backend Developer & Software Engineering Student",
-    description: "IPB University",
+    title: "Raffa Danendra Pramono",
+    description: "Backend Developer & Software Engineering Student",
     className: "lg:col-span-3 md:col-span-6 md:row-span-4 lg:min-h-[60vh]",
     imgClassName: "w-full h-full",
     titleClassName: "justify-end",
@@ -49,7 +49,7 @@ export const gridItems = [
 
   {
     id: 5,
-    title: "Skilled in Database Management",
+    title: "Designed and managed relational databases",
     description: "MySQL, PostgreSQL",
     className: "md:col-span-3 md:row-span-2",
     imgClassName: "absolute right-0 bottom-0 md:w-96 w-60",
@@ -76,7 +76,14 @@ export const projects = [
     des: "Developed backend services using Laravel to handle application logic, database management, and RESTful APIs.",
     img: "/manika.jpg",
     iconLists: ["/laravel.svg", "/tail.svg", "/postgresql.svg", , "/postman.svg"],
-    link: "/ui.earth.com",
+    link: "https://github.com/KARUNONIH/manika-brownies",
+    keyFeatures: [
+      "RESTful API development with Laravel",
+      "PostgreSQL database design and optimization",
+      "Authentication and authorization system",
+      "Order management system",
+      "Payment gateway integration",
+    ],
   },
   {
     id: 2,
@@ -85,6 +92,13 @@ export const projects = [
     img: "/warungsatebeber.png",
     iconLists: ["/next.svg", "/tail.svg", "/mysql.svg", "/springboot.svg", "/postman.svg"],
     link: "https://sate-beber.vercel.app/",
+    keyFeatures: [
+      "Spring Boot RESTful API development",
+      "MySQL database design and management",
+      "Menu and order management system",
+      "Real-time order tracking",
+      "Responsive frontend with Next.js",
+    ],
   },
   {
     id: 3,
@@ -92,7 +106,14 @@ export const projects = [
     des: "Implemented RESTful APIs using laravel to connect the backend with the Kotlin-based mobile application.",
     img: "/iquarium.png",
     iconLists: ["/laravel.svg", "/tail.svg","/kotlin.svg", "/mysql.svg", "/postman.svg"],
-    link: "/ui.aiimg.com",
+    link: "https://github.com/denmaidenn/anomali",
+    keyFeatures: [
+      "Laravel backend API for mobile app",
+      "Kotlin mobile application development",
+      "User authentication and profile management",
+      "Aquarium data management system",
+      "Cross-platform mobile compatibility",
+    ],
   },
   {
     id: 4,
@@ -100,7 +121,14 @@ export const projects = [
     des: "Developed and implemented RESTful APIs backend services using Laravel to serve data to the Next.js",
     img: "mitrajasapower.png",
     iconLists: ["/laravel.svg", "/next.svg", "/tail.svg", "/mysql.svg", "/postman.svg"],
-    link: "/ui.apple.com",
+    link: "https://github.com/denmaidenn/backend-mitrajasapower",
+    keyFeatures: [
+      "Laravel backend API development",
+      "Next.js frontend integration",
+      "Company profile and service management",
+      "Contact and inquiry system",
+      "SEO optimized web application",
+    ],
   },
   {
     id: 5,
@@ -109,6 +137,13 @@ export const projects = [
     img: "/pesantren.png",
     iconLists: ["/re.svg", "/tail.svg", "/nodejs.svg", "/mysql.svg", "/postman.svg"],
     link: "https://pesantrenalihsanbekasi.or.id/",
+    keyFeatures: [
+      "Node.js and Express.js backend development",
+      "PPDB (Student Registration) online system",
+      "Student data management",
+      "Document upload and management",
+      "Payment processing integration",
+    ],
   },
 ];
 
@@ -213,13 +248,16 @@ export const socialMedia = [
   {
     id: 1,
     img: "/git.svg",
+    link: "https://github.com/denmaidenn",
   },
   {
     id: 2,
-    img: "/twit.svg",
+    img: "/insta.svg",
+    link: "https://www.instagram.com/raffadanendraa/",
   },
   {
     id: 3,
     img: "/link.svg",
+    link: "https://www.linkedin.com/in/raffa-danendra-pramono-4365b7255/",
   },
 ];
