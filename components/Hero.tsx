@@ -40,33 +40,50 @@ const Hero = () => {
         />
       </div>
 
-      <div className="flex justify-center relative my-20 z-10">
-        <div className="max-w-[89vw] md:max-w-2xl lg:max-w-[60vw] flex flex-col items-center justify-center">
-          <p className="tracking-widest text-sm md:text-base lg:text-lg text-center text-blue-100 max-w-2xl">
-            Hi! I&apos;m Raffa Danendra Pramono
-          </p>
+      <div className="relative z-10 flex min-h-[calc(100vh-5rem)] items-center justify-center px-4">
+        <div className="w-full max-w-[89vw] md:max-w-[1200px]">
+          <div className="grid gap-10 md:grid-cols-[minmax(0,1fr)_420px] items-center">
+            <div className="space-y-6 text-center md:text-left">
+              <p className="tracking-widest text-sm md:text-base lg:text-lg text-blue-100 max-w-2xl mx-auto md:mx-0">
+                Hi! I&apos;m Raffa Danendra Pramono
+              </p>
 
-          {/**
-           *  Link: https://ui.aceternity.com/components/text-generate-effect
-           *
-           *  change md:text-6xl, add more responsive code
-           */}
-          <TextGenerateEffect
-            words="Software Engineering Student at IPB University"
-            className="text-center text-[40px] md:text-5xl lg:text-6xl"
-          />
+              <TextGenerateEffect
+                words="Software Engineering Student at IPB University"
+                className="text-center md:text-left text-[40px] md:text-5xl lg:text-6xl"
+              />
 
-          <p className="text-center md:tracking-wider mb-4 text-sm md:text-lg lg:text-2xl">
-            <span className="text-purple">Backend Developer</span> on a partner project, responsible for developing <span className="text-purple">CRUD functionalities</span>, designing <span className="text-purple">REST APIs</span>, and managing data to support application requirements.
-          </p>
+              <p className="mx-auto md:mx-0 max-w-2xl text-sm md:text-lg lg:text-2xl md:tracking-wider">
+                <span className="text-purple">Backend Developer</span> on a partner project, responsible for developing <span className="text-purple">CRUD functionalities</span>, designing <span className="text-purple">REST APIs</span>, and managing data to support application requirements.
+              </p>
 
-          <a href="#about">
-            <MagicButton
-              title="Show my work"
-              icon={<FaLocationArrow />}
-              position="right"
-            />
-          </a>
+              <a href="https://drive.google.com/file/d/1Ut6-qQYzqFIsLPO63y4z4QInzbnh_B6z/view?usp=sharing" target="_blank" rel="noreferrer">
+                <MagicButton
+                  title="Lihat CV"
+                  icon={<FaLocationArrow />}
+                  position="right"
+                />
+              </a>
+            </div>
+
+            <div className="mx-auto w-full max-w-[420px]">
+              <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 p-6 shadow-2xl shadow-black/20 backdrop-blur-xl">
+                <div className="absolute -top-8 -right-8 h-28 w-28 rounded-full bg-purple/20 blur-3xl" />
+                <div className="absolute -bottom-10 left-6 h-20 w-20 rounded-full bg-blue/20 blur-3xl" />
+
+                <div className="flex h-full flex-col items-center justify-center gap-6">
+                  <div className="relative h-80 w-full overflow-hidden rounded-[1.75rem] border border-white/10 bg-black/20">
+                    <img src="/raffa.png" alt="Photo card" className="h-full w-full object-cover" />
+                  </div>
+
+                  <div className="w-full rounded-3xl border border-white/10 bg-black/50 p-4 text-center">
+                    <p className="text-base font-medium text-white">Raffa Danendra Pramono</p>
+                    <p className="mt-2 text-sm text-slate-300">+62 878 0562 7343  |  raffadnd@gmail.com</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
