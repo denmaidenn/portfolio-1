@@ -1,7 +1,7 @@
 export const navItems = [
-  { name: "About", link: "#about" },
-  { name: "Projects", link: "#projects" },
-  { name: "Testimonials", link: "#testimonials" },
+  { name: "Home", link: "#home" },
+  { name: "Project", link: "#projects" },
+  { name: "Approach", link: "#approach" },
   { name: "Contact", link: "#contact" },
 ];
 
@@ -145,6 +145,48 @@ export const projects = [
       "Payment processing integration",
     ],
   },
+  {
+    id: 6,
+    title: "Sistem Analisis Tren Saham",
+    des: "Built a stock trend analysis system using Deep Learning (LSTM) to predict bullish/bearish price movements.",
+    img: "/stock.png",
+    iconLists: ["/python.png", "/keras.png", "/googlecollabs.png"],
+    link: "https://colab.research.google.com/drive/1F6jqp7qX7pbt_Sf_-FsBVmiAcbE6KuEo?usp=sharing",
+    keyFeatures: [
+      "Deep Learning LSTM model for trend prediction",
+      "Time series preprocessing and feature engineering",
+      "Technical indicators: MA and RSI",
+      "Backend integration for trading signal generation",
+    ],
+  },
+  {
+    id: 7,
+    title: "Laboratorium Vokasi OCR System",
+    des: "Developed a FastAPI backend for student data validation and PaddleOCR extraction from KTM documents.",
+    img: "/labvokasi.png",
+    iconLists: ["/fastapi.png", "/mysql.svg", "/paddleocr.png", "/yolov8.png"],
+    link: "https://github.com/rhnzaldi/smartlab-scanner",
+    keyFeatures: [
+      "FastAPI-based validation API for student data",
+      "PaddleOCR extraction for KTM documents",
+      "OCR parsing and database validation workflows",
+      "Performance optimization for OCR accuracy",
+    ],
+  },
+  {
+    id: 8,
+    title: "Face Recognition Absensi",
+    des: "Developed a Flask backend for face recognition attendance and managed face data storage and attendance history.",
+    img: "/facerecognition.png",
+    iconLists: ["/flask.png", "/mysql.svg"],
+    link: "https://github.com/MrafialexanderP/Face_recognition",
+    keyFeatures: [
+      "Face recognition attendance system with Flask",
+      "API design for face detection model integration",
+      "Face data storage and attendance history management",
+      "User attendance validation and reporting",
+    ],
+  }
 ];
 
 export const testimonials = [
@@ -258,6 +300,6 @@ export const socialMedia = [
   {
     id: 3,
     img: "/link.svg",
-    link: "https://www.linkedin.com/in/raffa-danendra-pramono-4365b7255/",
+    link: "https://www.linkedin.com/in/raffadanendraa/",
   },
 ];
