@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/jsm-logo.png" sizes="any" />
+        <link rel="icon" href="https://assets.vercel.com/image/upload/front/assets/design/vercel-triangle-black.svg" sizes="any" />
       </head>
       <body className={inter.className}>
         <ThemeProvider
