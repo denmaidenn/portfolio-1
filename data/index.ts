@@ -250,22 +250,22 @@ export const projects = [
     title: "KosFlow",
     des: "Developed a face-recognition-powered attendance and security management system for student housing, streamlining tenant verification and automated record reporting.",
     img: "/kosflow.png", // Atau gunakan /facerecognition.png jika itu halaman utama
-    iconLists: ["/nextjs.png", "/mysql.svg", "/nodejs.png", "/express.png", "/python.svg"], // Menambahkan Python karena ada Flask
+    iconLists: ["/nextjs.png", "/mysql.svg", "/nodejs.png", "/Express.png", "/Python.png"], // Menambahkan Python karena ada Flask
     link: "https://kosabah-fe-app-20260513224156.azurewebsites.net/login",
     role: "Quality Assurance",
     type: "Smart Tenant Management System",
     year: "2026",
-    impact: "Validated face data storage integrity, verified attendance detection accuracy, and audited automated historical reporting workflows.",
+    impact: "Audited system reliability for room and tenant registries, verified billing calculation accuracy, and tested real-time access log and camera monitoring performance.",
     documentation: [
       { title: "Recognition dashboard", image: "/kosflow.png" },
       { title: "Detection process", image: "/login.png" },
       { title: "Attendance records", image: "/kosflow.png" },
     ],
     keyFeatures: [
-      "AI-powered face recognition attendance system integrated via Flask",
-      "API testing and validation for seamless face detection model deployment",
-      "Secure face data storage and real-time attendance history management",
-      "Automated user attendance verification and structured reporting",
+      "Room & Tenant Inventory Management",
+      "Automated Billing System with Payment Reminders",
+      "Live Security Camera Monitoring Interface",
+      "Real-time Security Access Log Tracking",
     ],
   }
 ];
