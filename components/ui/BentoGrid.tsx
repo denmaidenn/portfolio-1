@@ -55,10 +55,15 @@ export const BentoGridItem = ({
 
   const [copied, setCopied] = useState(false);
 
-  const handleCopy = () => {
+  const handleCopy = async () => {
     const text = "raffadnd@gmail.com";
-    navigator.clipboard.writeText(text);
-    setCopied(true);
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2400);
+    } catch {
+      setCopied(false);
+    }
   };
 
   return (
@@ -80,11 +85,7 @@ export const BentoGridItem = ({
       <div className={`${id === 6 && "flex justify-center"} h-full`}>
         <div className="w-full h-full absolute">
           {img && (
-            <img
-              src={img}
-              alt={img}
-              className={cn(imgClassName, "object-cover object-center ")}
-            />
+            <img src={img} alt="" className={cn(imgClassName, "object-cover object-center ")} />
           )}
         </div>
         <div
@@ -92,12 +93,7 @@ export const BentoGridItem = ({
             } `}
         >
           {spareImg && (
-            <img
-              src={spareImg}
-              alt={spareImg}
-              //   width={220}
-              className="object-cover object-center w-full h-full"
-            />
+            <img src={spareImg} alt="" className="object-cover object-center w-full h-full" />
           )}
         </div>
         {id === 6 && (
@@ -164,7 +160,7 @@ export const BentoGridItem = ({
                 className={`absolute -bottom-5 right-0 ${copied ? "block" : "hidden"}`}
               >
                 <div className="rounded-3xl border border-white/10 bg-white/10 px-4 py-3 text-center text-sm text-white shadow-lg shadow-black/20 backdrop-blur-md">
-                  Email copied to clipboard!
+                  Email copied.
                 </div>
               </div>
 

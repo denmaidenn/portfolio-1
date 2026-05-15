@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import Clients from "@/components/Clients";
 import Approach from "@/components/Approach";
 import Experience from "@/components/Experience";
+import OrganizationExperience from "@/components/OrganizationExperience";
 import RecentProjects from "@/components/RecentProjects";
 import { FloatingNav } from "@/components/ui/FloatingNavbar";
 
@@ -19,6 +20,7 @@ const Home = () => {
         <Hero />
         <Grid />
         <RecentProjects />
+        <OrganizationExperience />
         <Experience />
         <Approach />
         <Footer />

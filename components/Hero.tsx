@@ -57,7 +57,7 @@ const Hero = () => {
                 <span className="text-purple">Backend Developer</span> on a partner project, responsible for developing <span className="text-purple">CRUD functionalities</span>, designing <span className="text-purple">REST APIs</span>, and managing data to support application requirements.
               </p>
 
-              <a href="https://drive.google.com/file/d/1Ut6-qQYzqFIsLPO63y4z4QInzbnh_B6z/view?usp=sharing" target="_blank" rel="noreferrer">
+              <a href="https://drive.google.com/file/d/1EV4YA6Farmqen1afV3yaw7JEJC8yoMqI/view?usp=sharing" target="_blank" rel="noreferrer">
                 <MagicButton
                   title="Lihat CV"
                   icon={<FaLocationArrow />}

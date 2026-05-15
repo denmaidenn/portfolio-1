@@ -73,10 +73,17 @@ export const projects = [
   {
     id: 1,
     title: "Manika Brownies",
-    des: "Developed backend services using Laravel to handle application logic, database management, and RESTful APIs.",
+    des: "Developed Manika Brownies, an e-commerce website for selling brownies and bakery products online. Built using Laravel featuring product catalogs, online ordering, and customer purchase management.",
     img: "/manika.jpg",
     iconLists: ["/laravel.svg", "/tail.svg", "/postgresql.svg", , "/postman.svg"],
     link: "https://github.com/KARUNONIH/manika-brownies",
+    role: "Backend Developer",
+    type: "E-commerce API",
+    year: "2024",
+    impact: "Built reliable backend foundations for catalog, order, and payment workflows.",
+    documentation: [
+      { title: "Project cover", image: "/manika.jpg" }
+    ],
     keyFeatures: [
       "RESTful API development with Laravel",
       "PostgreSQL database design and optimization",
@@ -88,10 +95,17 @@ export const projects = [
   {
     id: 2,
     title: "Warung Sate Beber",
-    des: "Implemented backend services and RESTful APIs using Spring Boot to handle application logic and data management.",
+    des: "Developed a web-based ordering system for Warung Sate Beber as a backend developer using Spring Boot, integrated with Next.js on the frontend. The system features a shopping cart functionality for seamless order management before checkout.",
     img: "/warungsatebeber.png",
     iconLists: ["/next.svg", "/tail.svg", "/mysql.svg", "/springboot.svg", "/postman.svg"],
     link: "https://sate-beber.vercel.app/",
+    role: "Backend Developer",
+    type: "Restaurant Ordering Platform",
+    year: "2024",
+    impact: "Connected customer-facing menus with structured order management and tracking.",
+    documentation: [
+      { title: "Live interface", image: "/warungsatebeber.png" }
+    ],
     keyFeatures: [
       "Spring Boot RESTful API development",
       "MySQL database design and management",
@@ -103,10 +117,17 @@ export const projects = [
   {
     id: 3,
     title: "Iquarium",
-    des: "Implemented RESTful APIs using laravel to connect the backend with the Kotlin-based mobile application.",
+    des: "Developed iQuarium, an e-commerce platform for buying and selling ornamental fish equipment. Built with Laravel for the backend and a Kotlin-based mobile application, featuring product listings, purchasing functionality, and order management.",
     img: "/iquarium.png",
     iconLists: ["/laravel.svg", "/tail.svg","/kotlin.svg", "/mysql.svg", "/postman.svg"],
     link: "https://github.com/denmaidenn/anomali",
+    role: "Backend Developer",
+    type: "Mobile App API",
+    year: "2024",
+    impact: "Delivered API services for mobile aquarium data workflows and user account flows.",
+    documentation: [
+      { title: "Mobile app preview", image: "/iquarium.png" }
+    ],
     keyFeatures: [
       "Laravel backend API for mobile app",
       "Kotlin mobile application development",
@@ -118,10 +139,17 @@ export const projects = [
   {
     id: 4,
     title: "PT. Mitra Jasa Power",
-    des: "Developed and implemented RESTful APIs backend services using Laravel to serve data to the Next.js",
+    des: "Developed a web-based company profile for PT Mitra Jasa Power, a logistics company specializing in large-scale transportation across Indonesia. Built using Laravel for the backend and Next.js for the frontend, featuring service information, contact inquiries, and an admin dashboard for content management.",
     img: "mitrajasapower.png",
     iconLists: ["/laravel.svg", "/next.svg", "/tail.svg", "/mysql.svg", "/postman.svg"],
     link: "https://github.com/denmaidenn/backend-mitrajasapower",
+    role: "Backend Developer",
+    type: "Company Profile CMS",
+    year: "2024",
+    impact: "Provided backend services for company content, services, and inquiry management.",
+    documentation: [
+      { title: "Company website", image: "/mitrajasapower.png" }
+    ],
     keyFeatures: [
       "Laravel backend API development",
       "Next.js frontend integration",
@@ -133,10 +161,17 @@ export const projects = [
   {
     id: 5,
     title: "Pesantren Al Ihsan Bekasi",
-    des: "Managed database integration data, and develop backend services using Node.js and Express.js to support PPDB online system.",
+    des: "Developed a web-based PPDB system and company profile for Pesantren Al-Ihsan Bekasi. Built with Next.js for the frontend and Express.js for the backend to automate student registration and strengthen the institution's digital presence.",
     img: "/pesantren.png",
     iconLists: ["/re.svg", "/tail.svg", "/nodejs.svg", "/mysql.svg", "/postman.svg"],
     link: "https://pesantrenalihsanbekasi.or.id/",
+    role: "Backend Developer",
+    type: "PPDB Online System",
+    year: "2025",
+    impact: "Supported student registration flows with data validation, uploads, and payment processes.",
+    documentation: [
+      { title: "Registration system", image: "/pesantren.png" }
+    ],
     keyFeatures: [
       "Node.js and Express.js backend development",
       "PPDB (Student Registration) online system",
@@ -148,10 +183,17 @@ export const projects = [
   {
     id: 6,
     title: "Sistem Analisis Tren Saham",
-    des: "Built a stock trend analysis system using Deep Learning (LSTM) to predict bullish/bearish price movements.",
+    des: "Developed a stock trend analysis system using deep learning with an LSTM model implemented in Google Colab. The system analyzes historical stock data and predicts price movement direction based on time series patterns, utilizing Python and libraries such as TensorFlow, Keras, and Pandas for data processing and model development.",
     img: "/stock.png",
     iconLists: ["/python.png", "/keras.png", "/googlecollabs.png"],
     link: "https://colab.research.google.com/drive/1F6jqp7qX7pbt_Sf_-FsBVmiAcbE6KuEo?usp=sharing",
+    role: "Machine Learning Developer",
+    type: "Stock Trend Analysis",
+    year: "2026",
+    impact: "Created a learning pipeline to classify bullish and bearish movement from time-series signals.",
+    documentation: [
+      { title: "Model notebook", image: "/stock.png" }
+    ],
     keyFeatures: [
       "Deep Learning LSTM model for trend prediction",
       "Time series preprocessing and feature engineering",
@@ -162,10 +204,19 @@ export const projects = [
   {
     id: 7,
     title: "Laboratorium Vokasi OCR System",
-    des: "Developed a FastAPI backend for student data validation and PaddleOCR extraction from KTM documents.",
+    des: "Developed an AI-powered laboratory borrowing system that automates student verification by scanning Student ID cards (KTM). Built using FastAPI for the backend, YOLOv8 for object detection, PaddleOCR for text extraction, and Next.js for the frontend interface, enabling automatic identification and efficient laboratory booking management.",
     img: "/labvokasi.png",
     iconLists: ["/fastapi.png", "/mysql.svg", "/paddleocr.png", "/yolov8.png"],
     link: "https://github.com/rhnzaldi/smartlab-scanner",
+    role: "Backend & OCR Developer",
+    type: "Document Validation System",
+    year: "2025",
+    impact: "Automated KTM document extraction and validation for lab administration workflows.",
+    documentation: [
+      { title: "Scanner workflow", image: "/labvoks_verifktm.png" },
+      { title: "OCR processing", image: "/labvoks.png" },
+      { title: "Validation database", image: "/labvoks_login.png" },
+    ],
     keyFeatures: [
       "FastAPI-based validation API for student data",
       "PaddleOCR extraction for KTM documents",
@@ -176,15 +227,45 @@ export const projects = [
   {
     id: 8,
     title: "Face Recognition Absensi",
-    des: "Developed a Flask backend for face recognition attendance and managed face data storage and attendance history.",
+    des: "Developed a face recognition-based attendance system using Flask for the backend, implementing HOG and CNN algorithms for facial detection and recognition to automatically record user attendance.",
     img: "/facerecognition.png",
-    iconLists: ["/flask.png", "/mysql.svg"],
+    iconLists: ["/flask.png", "/mysql.svg", "/HOG.png", "/CNN.png"],
     link: "https://github.com/MrafialexanderP/Face_recognition",
+    role: "Backend Developer",
+    type: "Attendance System",
+    year: "2025",
+    impact: "Managed face data storage, attendance validation, and historical reporting flows.",
+    documentation: [
+      { title: "Recognition dashboard", image: "/facerecognition.png" }
+    ],
     keyFeatures: [
       "Face recognition attendance system with Flask",
       "API design for face detection model integration",
       "Face data storage and attendance history management",
       "User attendance validation and reporting",
+    ],
+  },
+  {
+    id: 9,
+    title: "KosFlow",
+    des: "Developed a face-recognition-powered attendance and security management system for student housing, streamlining tenant verification and automated record reporting.",
+    img: "/kosflow.png", // Atau gunakan /facerecognition.png jika itu halaman utama
+    iconLists: ["/nextjs.png", "/mysql.svg", "/nodejs.png", "/express.png", "/python.svg"], // Menambahkan Python karena ada Flask
+    link: "https://kosabah-fe-app-20260513224156.azurewebsites.net/login",
+    role: "Quality Assurance",
+    type: "Smart Tenant Management System",
+    year: "2026",
+    impact: "Validated face data storage integrity, verified attendance detection accuracy, and audited automated historical reporting workflows.",
+    documentation: [
+      { title: "Recognition dashboard", image: "/kosflow.png" },
+      { title: "Detection process", image: "/login.png" },
+      { title: "Attendance records", image: "/kosflow.png" },
+    ],
+    keyFeatures: [
+      "AI-powered face recognition attendance system integrated via Flask",
+      "API testing and validation for seamless face detection model deployment",
+      "Secure face data storage and real-time attendance history management",
+      "Automated user attendance verification and structured reporting",
     ],
   }
 ];
@@ -284,6 +365,19 @@ export const workExperience = [
     className: "md:col-span-2",
     thumbnail: "/exp4.svg",
   },
+];
+
+export const organizationExperience = [
+  {
+    id: 1,
+    organization: "Software Engineering Cabinet",
+    role: "Staff of Public Relations Division",
+    period: "2025 - 2026",
+    description:
+      "Managed digital communication channels, supported technical documentation, and drove student community engagement through collaborative leadership.",
+    tags: ["Leadership", "Documentation", "Public Relations", "Technical Operations"],
+    accent: "blue",
+  }
 ];
 
 export const socialMedia = [
