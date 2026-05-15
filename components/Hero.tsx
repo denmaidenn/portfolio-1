@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+import Typed from "typed.js";
 import { FaLocationArrow } from "react-icons/fa6";
 
 import MagicButton from "./MagicButton";
@@ -5,6 +9,32 @@ import { Spotlight } from "./ui/Spotlight";
 import { TextGenerateEffect } from "./ui/TextGenerateEffect";
 
 const Hero = () => {
+  const typedDescriptionRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    if (!typedDescriptionRef.current) return;
+
+    const typed = new Typed(typedDescriptionRef.current, {
+      strings: [
+        '<span class="text-purple">Backend Developer</span> on a partner project, responsible for developing <span class="text-purple">CRUD functionalities</span>, designing <span class="text-purple">REST APIs</span>, and managing data to support application requirements.',
+        'I build <span class="text-purple">scalable backend services</span>, design <span class="text-purple">database workflows</span>, and integrate APIs with modern frontend applications.',
+        'Focused on <span class="text-purple">Laravel, Express.js, FastAPI</span>, and reliable data systems for real project needs.',
+      ],
+      typeSpeed: 32,
+      backSpeed: 18,
+      backDelay: 1800,
+      startDelay: 300,
+      loop: true,
+      smartBackspace: true,
+      showCursor: true,
+      cursorChar: "|",
+    });
+
+    return () => {
+      typed.destroy();
+    };
+  }, []);
+
   return (
     <div className="pb-20 pt-36">
       {/**
@@ -53,8 +83,8 @@ const Hero = () => {
                 className="text-center md:text-left text-[40px] md:text-5xl lg:text-6xl"
               />
 
-              <p className="mx-auto md:mx-0 max-w-2xl text-sm md:text-lg lg:text-2xl md:tracking-wider">
-                <span className="text-purple">Backend Developer</span> on a partner project, responsible for developing <span className="text-purple">CRUD functionalities</span>, designing <span className="text-purple">REST APIs</span>, and managing data to support application requirements.
+              <p className="mx-auto min-h-[5rem] max-w-2xl text-sm md:mx-0 md:min-h-[6.75rem] md:text-lg md:tracking-wider lg:text-2xl">
+                <span ref={typedDescriptionRef} />
               </p>
 
               <a href="https://drive.google.com/file/d/1EV4YA6Farmqen1afV3yaw7JEJC8yoMqI/view?usp=sharing" target="_blank" rel="noreferrer">

@@ -1,7 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type MouseEvent,
+  type PointerEvent,
+  type WheelEvent,
+} from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   BookOpen,
@@ -12,12 +20,19 @@ import {
   Github,
   Globe2,
   ImageIcon,
+  Maximize2,
+  Minimize2,
+  Move,
+  RotateCcw,
+  ZoomIn,
+  ZoomOut,
   X,
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
 type ModalTab = "overview" | "docs" | "screenshots";
+type ImageFit = "contain" | "cover";
 
 interface ProjectModalProps {
   isOpen: boolean;
@@ -93,6 +108,16 @@ const getTechName = (icon: string) => {
 const ProjectModal = ({ isOpen, onClose, project }: ProjectModalProps) => {
   const [activeTab, setActiveTab] = useState<ModalTab>("overview");
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [zoom, setZoom] = useState(1);
+  const [imageFit, setImageFit] = useState<ImageFit>("contain");
+  const [pan, setPan] = useState({ x: 0, y: 0 });
+  const [dragStart, setDragStart] = useState<{
+    pointerX: number;
+    pointerY: number;
+    panX: number;
+    panY: number;
+  } | null>(null);
+  const viewerRef = useRef<HTMLDivElement>(null);
 
   const documentation = useMemo(() => {
     if (!project) return [];
@@ -129,6 +154,104 @@ const ProjectModal = ({ isOpen, onClose, project }: ProjectModalProps) => {
     );
   };
 
+  const resetImageView = () => {
+    setZoom(1);
+    setImageFit("contain");
+    setPan({ x: 0, y: 0 });
+    setDragStart(null);
+  };
+
+  const clampPan = (
+    nextPan: { x: number; y: number },
+    nextZoom: number
+  ) => {
+    const rect = viewerRef.current?.getBoundingClientRect();
+    if (!rect || nextZoom <= 1) return { x: 0, y: 0 };
+
+    const maxX = (rect.width * (nextZoom - 1)) / 2 + 120;
+    const maxY = (rect.height * (nextZoom - 1)) / 2 + 120;
+
+    return {
+      x: Math.min(maxX, Math.max(-maxX, nextPan.x)),
+      y: Math.min(maxY, Math.max(-maxY, nextPan.y)),
+    };
+  };
+
+  const updateZoom = (
+    nextZoom: number,
+    anchor?: { x: number; y: number }
+  ) => {
+    const clampedZoom = Math.min(
+      3.25,
+      Math.max(0.8, Number(nextZoom.toFixed(2)))
+    );
+
+    if (!anchor || !viewerRef.current) {
+      setZoom(clampedZoom);
+      setPan((current) => clampPan(current, clampedZoom));
+      return;
+    }
+
+    const rect = viewerRef.current.getBoundingClientRect();
+    const anchorFromCenter = {
+      x: anchor.x - rect.left - rect.width / 2,
+      y: anchor.y - rect.top - rect.height / 2,
+    };
+    const ratio = clampedZoom / zoom;
+    const nextPan = {
+      x: anchorFromCenter.x - (anchorFromCenter.x - pan.x) * ratio,
+      y: anchorFromCenter.y - (anchorFromCenter.y - pan.y) * ratio,
+    };
+
+    setZoom(clampedZoom);
+    setPan(clampPan(nextPan, clampedZoom));
+  };
+
+  const handleViewerWheel = (event: WheelEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    const direction = event.deltaY > 0 ? -0.16 : 0.16;
+    updateZoom(zoom + direction, { x: event.clientX, y: event.clientY });
+  };
+
+  const handleViewerDoubleClick = (event: MouseEvent<HTMLDivElement>) => {
+    updateZoom(zoom >= 2 ? 1 : zoom + 0.75, {
+      x: event.clientX,
+      y: event.clientY,
+    });
+  };
+
+  const handleViewerPointerDown = (event: PointerEvent<HTMLDivElement>) => {
+    if (zoom <= 1) return;
+    event.currentTarget.setPointerCapture(event.pointerId);
+    setDragStart({
+      pointerX: event.clientX,
+      pointerY: event.clientY,
+      panX: pan.x,
+      panY: pan.y,
+    });
+  };
+
+  const handleViewerPointerMove = (event: PointerEvent<HTMLDivElement>) => {
+    if (!dragStart || zoom <= 1) return;
+
+    setPan(
+      clampPan(
+        {
+          x: dragStart.panX + event.clientX - dragStart.pointerX,
+          y: dragStart.panY + event.clientY - dragStart.pointerY,
+        },
+        zoom
+      )
+    );
+  };
+
+  const handleViewerPointerUp = (event: PointerEvent<HTMLDivElement>) => {
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
+    setDragStart(null);
+  };
+
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape" && isOpen) onClose();
@@ -148,7 +271,12 @@ const ProjectModal = ({ isOpen, onClose, project }: ProjectModalProps) => {
   useEffect(() => {
     setActiveTab("overview");
     setActiveImageIndex(0);
+    resetImageView();
   }, [project?.id]);
+
+  useEffect(() => {
+    resetImageView();
+  }, [activeImageIndex, activeTab]);
 
   if (!project) return null;
 
@@ -203,7 +331,7 @@ const ProjectModal = ({ isOpen, onClose, project }: ProjectModalProps) => {
                 </div>
               </div>
 
-              <div className="relative max-h-[92vh] overflow-y-auto px-5 py-6 sm:px-8 md:px-12">
+              <div className="relative max-h-[92vh] overflow-y-auto px-5 py-6 [scrollbar-width:none] sm:px-8 md:px-12 [&::-webkit-scrollbar]:hidden">
                 <button
                   type="button"
                   onClick={onClose}
@@ -317,47 +445,135 @@ const ProjectModal = ({ isOpen, onClose, project }: ProjectModalProps) => {
 
                 {activeTab === "screenshots" && (
                   <div className="pt-11">
-                    <div className="flex items-center justify-between gap-4">
+                    <div className="flex flex-col gap-5 xl:flex-row xl:items-center xl:justify-between">
                       <div>
                         <h2 className="text-3xl font-bold text-white">
                           Screenshots
                         </h2>
                         <p className="mt-3 text-base text-[#aeb5df]">
-                          {documentation.length} documentation shots available.
+                          {documentation.length} documentation shots available. Scroll over the image to zoom toward your cursor, then drag to explore.
                         </p>
                       </div>
-                      {documentation.length > 1 && (
-                        <div className="flex gap-2">
-                          <button
-                            type="button"
-                            onClick={showPreviousImage}
-                            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/10 text-white transition hover:bg-white hover:text-[#100d45] focus:outline-none focus:ring-2 focus:ring-purple"
-                            aria-label="Previous screenshot"
-                          >
-                            <ChevronLeft className="h-5 w-5" />
-                          </button>
-                          <button
-                            type="button"
-                            onClick={showNextImage}
-                            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/10 text-white transition hover:bg-white hover:text-[#100d45] focus:outline-none focus:ring-2 focus:ring-purple"
-                            aria-label="Next screenshot"
-                          >
-                            <ChevronRight className="h-5 w-5" />
-                          </button>
+
+                      <div className="flex flex-wrap gap-2">
+                        {documentation.length > 1 && (
+                          <>
+                            <button
+                              type="button"
+                              onClick={showPreviousImage}
+                              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/10 text-white transition hover:bg-white hover:text-[#100d45] focus:outline-none focus:ring-2 focus:ring-purple"
+                              aria-label="Previous screenshot"
+                            >
+                              <ChevronLeft className="h-5 w-5" />
+                            </button>
+                            <button
+                              type="button"
+                              onClick={showNextImage}
+                              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/10 text-white transition hover:bg-white hover:text-[#100d45] focus:outline-none focus:ring-2 focus:ring-purple"
+                              aria-label="Next screenshot"
+                            >
+                              <ChevronRight className="h-5 w-5" />
+                            </button>
+                          </>
+                        )}
+                        <button
+                          type="button"
+                          onClick={() => updateZoom(zoom - 0.25)}
+                          className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/10 text-white transition hover:bg-white hover:text-[#100d45] focus:outline-none focus:ring-2 focus:ring-purple"
+                          aria-label="Zoom out"
+                        >
+                          <ZoomOut className="h-5 w-5" />
+                        </button>
+                        <div className="flex h-11 min-w-16 items-center justify-center rounded-full border border-white/10 bg-black/25 px-3 text-xs font-bold text-white">
+                          {Math.round(zoom * 100)}%
                         </div>
-                      )}
+                        <button
+                          type="button"
+                          onClick={() => updateZoom(zoom + 0.25)}
+                          className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/10 text-white transition hover:bg-white hover:text-[#100d45] focus:outline-none focus:ring-2 focus:ring-purple"
+                          aria-label="Zoom in"
+                        >
+                          <ZoomIn className="h-5 w-5" />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setImageFit((current) => (current === "contain" ? "cover" : "contain"));
+                            setPan({ x: 0, y: 0 });
+                          }}
+                          className="inline-flex h-11 items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 text-xs font-bold uppercase tracking-[0.12em] text-white transition hover:bg-white hover:text-[#100d45] focus:outline-none focus:ring-2 focus:ring-purple"
+                          aria-label="Toggle image fit mode"
+                        >
+                          {imageFit === "contain" ? (
+                            <Maximize2 className="h-4 w-4" />
+                          ) : (
+                            <Minimize2 className="h-4 w-4" />
+                          )}
+                          {imageFit === "contain" ? "Fill" : "Fit"}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={resetImageView}
+                          className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/10 text-white transition hover:bg-white hover:text-[#100d45] focus:outline-none focus:ring-2 focus:ring-purple"
+                          aria-label="Reset screenshot view"
+                        >
+                          <RotateCcw className="h-5 w-5" />
+                        </button>
+                      </div>
                     </div>
 
                     <div className="mt-8 overflow-hidden rounded-3xl border border-white/10 bg-black/25">
-                      <div className="relative aspect-[16/9]">
+                      <div
+                        ref={viewerRef}
+                        className="relative h-[min(58vh,34rem)] min-h-[18rem] touch-none overflow-hidden bg-[#060719]"
+                        onWheel={handleViewerWheel}
+                        onDoubleClick={handleViewerDoubleClick}
+                        onPointerDown={handleViewerPointerDown}
+                        onPointerMove={handleViewerPointerMove}
+                        onPointerUp={handleViewerPointerUp}
+                        onPointerCancel={handleViewerPointerUp}
+                      >
+                        <div className="absolute left-4 top-4 z-20 inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/60 px-3 py-1.5 text-xs font-medium text-white backdrop-blur">
+                          <Move className="h-4 w-4 text-purple" />
+                          {zoom > 1 ? "Drag to pan" : "Wheel or double click to zoom"}
+                        </div>
                         {activeImage && (
-                          <Image
-                            src={activeImage.image}
-                            alt={activeImage.title}
-                            fill
-                            sizes="(min-width: 768px) 56vw, 100vw"
-                            className="object-contain p-4"
-                          />
+                          <motion.div
+                            key={`${activeImage.image}-${activeImageIndex}`}
+                            className={cn(
+                              "absolute inset-0",
+                              zoom > 1
+                                ? "cursor-grab active:cursor-grabbing"
+                                : "cursor-zoom-in"
+                            )}
+                            animate={{
+                              x: pan.x,
+                              y: pan.y,
+                              scale: zoom,
+                            }}
+                            transition={{
+                              ...(dragStart
+                                ? { duration: 0 }
+                                : {
+                                    type: "spring",
+                                    stiffness: 260,
+                                    damping: 30,
+                                  }),
+                            }}
+                            style={{ transformOrigin: "center" }}
+                          >
+                            <Image
+                              src={activeImage.image}
+                              alt={activeImage.title}
+                              fill
+                              sizes="(min-width: 768px) 56vw, 100vw"
+                              className={cn(
+                                "select-none p-4",
+                                imageFit === "contain" ? "object-contain" : "object-cover"
+                              )}
+                              draggable={false}
+                            />
+                          </motion.div>
                         )}
                       </div>
                     </div>
@@ -391,6 +607,7 @@ const ProjectModal = ({ isOpen, onClose, project }: ProjectModalProps) => {
                     </div>
                   </div>
                 )}
+
               </div>
             </div>
           </motion.div>
